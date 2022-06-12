@@ -21,9 +21,9 @@ import os
 
 ### Make a list of raw images to delete
 
-DEL_PATH = "C://test//deleted"
-FAM_PATH = "C://test//Family"
-DIR_PATH = "C://test"
+DEL_PATH = "C://fuji_test//deleted"
+FAM_PATH = "C://fuji_test//Family"
+DIR_PATH = "C://fuji_test"
 del_list = os.listdir(DEL_PATH)
 fam_list = os.listdir(FAM_PATH)
 dir_list = os.listdir(DIR_PATH)
