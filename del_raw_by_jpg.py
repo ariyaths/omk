@@ -40,10 +40,9 @@ raw_del_list.sort()
 print(raw_del_list)
 
 ### Delete the raw images
-"""
+
 for directory in dir_list:
     for file in raw_del_list:
         full_path = DIR_PATH + "//" + directory + "//raw//" + file
         if os.path.exists(full_path):
             os.remove(full_path)
-"""
