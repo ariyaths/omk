@@ -25,23 +25,23 @@ open(r"C:\fuji_test\23-04-22\jpg\A.jpg", "w")
 open(r"C:\fuji_test\23-04-22\jpg\B.jpg", "w")
 open(r"C:\fuji_test\23-04-22\jpg\D.jpg", "w")
 open(r"C:\fuji_test\23-04-22\jpg\F.jpg", "w")
-open(r"C:\fuji_test\23-04-22\raw\A.raw", "w")
-open(r"C:\fuji_test\23-04-22\raw\B.raw", "w")
-open(r"C:\fuji_test\23-04-22\raw\D.raw", "w")
-open(r"C:\fuji_test\23-04-22\raw\E.raw", "w")
+open(r"C:\fuji_test\23-04-22\raw\A.RAF", "w")
+open(r"C:\fuji_test\23-04-22\raw\B.RAF", "w")
+open(r"C:\fuji_test\23-04-22\raw\D.RAF", "w")
+open(r"C:\fuji_test\23-04-22\raw\E.RAF", "w")
 open(r"C:\fuji_test\24-04-22\jpg\A.jpg", "w")
 open(r"C:\fuji_test\24-04-22\jpg\B.jpg", "w")
 open(r"C:\fuji_test\24-04-22\jpg\D.jpg", "w")
 open(r"C:\fuji_test\24-04-22\jpg\F.jpg", "w")
-open(r"C:\fuji_test\24-04-22\raw\A.raw", "w")
-open(r"C:\fuji_test\24-04-22\raw\B.raw", "w") 
-open(r"C:\fuji_test\24-04-22\raw\D.raw", "w")
-open(r"C:\fuji_test\24-04-22\raw\E.raw", "w")
+open(r"C:\fuji_test\24-04-22\raw\A.RAF", "w")
+open(r"C:\fuji_test\24-04-22\raw\B.RAF", "w") 
+open(r"C:\fuji_test\24-04-22\raw\D.RAF", "w")
+open(r"C:\fuji_test\24-04-22\raw\E.RAF", "w")
 
 exec(open(r"C:\code\omk\runner.py").read())
 
-assert ld(r"C:\fuji_test\23-04-22\raw") == ["E.raw"]
-assert ld(r"C:\fuji_test\24-04-22\raw") == ["E.raw"]
+assert ld(r"C:\fuji_test\23-04-22\raw") == ["E.RAF"]
+assert ld(r"C:\fuji_test\24-04-22\raw") == ["E.RAF"]
 assert ld(r"C:\fuji_test\23-04-22\jpg") == ["A.jpg", "B.jpg", "D.jpg", "F.jpg"]
 assert ld(r"C:\fuji_test\24-04-22\jpg") == ["A.jpg", "B.jpg", "D.jpg", "F.jpg"]
 assert ld(r"C:\fuji_test\deleted") == ["A.jpg", "B.jpg"]
