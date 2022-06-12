@@ -8,7 +8,7 @@ Created on Sun Jun 12 07:45:50 2022
 from os import mkdir as mk, listdir as ld
 from shutil import rmtree
 
-mk(r"C:\fuji_test_test")
+mk(r"C:\fuji_test")
 mk(r"C:\fuji_test\23-04-22")
 mk(r"C:\fuji_test\23-04-22\jpg")
 mk(r"C:\fuji_test\23-04-22\raw")
@@ -38,8 +38,8 @@ open(r"C:\fuji_test\24-04-22\raw\B.raw", "w")
 open(r"C:\fuji_test\24-04-22\raw\D.raw", "w")
 open(r"C:\fuji_test\24-04-22\raw\E.raw", "w")
 
-execfile(r"C:\code\omk\runner.py")
-
+exec(open(r"C:\code\omk\runner.py").read())
+ 
 assert ld(r"C:\fuji_test\23-04-22\raw") == ["E.raw"]
 assert ld(r"C:\fuji_test\24-04-22\raw") == ["E.raw"]
 assert ld(r"C:\fuji_test\23-04-22\jpg") == ["A.jpg", "B.jpg", "D.jpg", "F.jpg"]

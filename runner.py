@@ -69,7 +69,7 @@ def delete_all(generator_object, path):
     for file in generator_object:
         remove(path + "\\" + file + ".raw")
 
-FOLDER = "C:\\Fuji"
+FOLDER = "C:\\fuji_test"
 to_parse = [item for item in ld(FOLDER) if item[0].isdigit()]
 to_del = slicer(FOLDER + "\\deleted") + slicer(FOLDER + "\\Family")
 
