@@ -7,28 +7,22 @@ Created on Sat Jun 11 09:47:43 2022
 
 from os import listdir as ld, remove
 
-def replacer(rep_path):
+def replacer(path):
     """
 
     Parameters
     ----------
-    slice_path : string
+    path : string
         file path
 
     Returns
     -------
     out
-        a copy of all items in slice_list
-        with extensions removed.
+        a copy of all items in rep_path
+        with .JPG replaced with .RAF.
 
     """
-    rep_list = ld(rep_path)
-    out = []
-
-    for filename in rep_list:
-        out += [filename.replace(".JPG", ".RAF")]
-
-    return out
+    return [s.replace(".JPG", ".RAF") for s in ld(path)]
 
 def find_similar(first_l, second_l):
     """
@@ -47,12 +41,10 @@ def find_similar(first_l, second_l):
 
     """
     for item in first_l:
-        print(item)
         if item in second_l:
-           
             yield item
 
-def delete_all(generator_object, path):
+def delete_all(generator_object, rem_path):
     """
 
     Parameters
@@ -68,7 +60,7 @@ def delete_all(generator_object, path):
 
     """
     for file in generator_object:
-        remove(path + "\\" + file)
+        remove(rem_path + "\\" + file)
 
 FOLDER = "C:\\fuji_test"
 to_parse = [item for item in ld(FOLDER) if item[0].isdigit()]
