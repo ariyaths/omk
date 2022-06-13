@@ -7,7 +7,7 @@ Created on Sat Jun 11 09:47:43 2022
 
 from os import listdir as ld, remove
 
-def slicer(slice_path):
+def replacer(rep_path):
     """
 
     Parameters
@@ -22,12 +22,11 @@ def slicer(slice_path):
         with extensions removed.
 
     """
-    slice_list = ld(slice_path)
+    rep_list = ld(rep_path)
     out = []
 
-    for filename in slice_list:
-        idx = filename.rfind(".")
-        out += [filename[:idx]]
+    for filename in rep_list:
+        out += [filename.replace(".JPG", ".RAF")]
 
     return out
 
@@ -48,7 +47,9 @@ def find_similar(first_l, second_l):
 
     """
     for item in first_l:
+        print(item)
         if item in second_l:
+           
             yield item
 
 def delete_all(generator_object, path):
@@ -67,13 +68,12 @@ def delete_all(generator_object, path):
 
     """
     for file in generator_object:
-        remove(path + "\\" + file + ".RAF")
+        remove(path + "\\" + file)
 
 FOLDER = "C:\\fuji_test"
 to_parse = [item for item in ld(FOLDER) if item[0].isdigit()]
-to_del = slicer(FOLDER + "\\deleted") + slicer(FOLDER + "\\Family")
+to_del = replacer(FOLDER + "\\deleted") + replacer(FOLDER + "\\Family")
 
 for sub_fold in to_parse:
     raw_path = FOLDER + "\\" + sub_fold + "\\raw"
-    sim = find_similar(slicer(raw_path), to_del)
-    delete_all(sim, raw_path)
+    delete_all(find_similar(ld(raw_path), to_del), raw_path)

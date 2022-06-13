@@ -38,8 +38,7 @@ open(r"C:\fuji_test\24-04-22\raw\B.RAF", "w")
 open(r"C:\fuji_test\24-04-22\raw\D.RAF", "w")
 open(r"C:\fuji_test\24-04-22\raw\E.RAF", "w")
 
-exec(open(r"C:\code\omk\del_raw_by_jpg.py").read())
-# exec(open(r"C:\code\omk\runner.py").read())
+exec(open(r"C:\code\omk\runner.py").read())
 
 assert ld(r"C:\fuji_test\23-04-22\raw") == ["E.RAF"]
 assert ld(r"C:\fuji_test\24-04-22\raw") == ["E.RAF"]
