@@ -1,0 +1,17 @@
+class MedianFinder:
+
+    def __init__(self):
+        self.arr = []
+        
+
+    def addNum(self, num: int) -> None:
+        self.arr.append(num)
+
+    def findMedian(self) -> float:
+        if len(self.arr) % 2 == 0:
+            self.arr.sort()
+            return (self.arr[len(self.arr) // 2 - 1] + self.arr[len(self.arr) // 2]) / 2
+        
+        else:
+            self.arr.sort()
+            return self.arr[len(self.arr)//2]
