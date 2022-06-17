@@ -1,0 +1,36 @@
+class Solution:
+    def longestDupSubstring(self, S: str) -> str:
+        
+        nums=[ord(char)-ord("a") for char in S]
+        factor, module = 29, 10000019
+        
+        low, high, ans=0, len(S), [0,0]
+        
+        while high-low>1:
+            
+            mid=max((high+10*low)//11, low+1)
+            
+            last_factor = pow(factor, mid-1, module)
+            hash_value = sum([nums[i]*pow(factor, mid-1-i, module) for i in range(mid)]) % module
+            
+            dict={} # Stores hash values and links to starts of the sequences with such hash values
+            
+            for i in range(len(S)-mid+1):
+                
+                if hash_value not in dict: dict[hash_value]=[]
+                for j in dict[hash_value]:
+                    if nums[i:i+mid]==nums[j:j+mid]:
+                        
+                        while i + low < len(S) and nums[i+low]==nums[j+low]: low += 1
+                        ans=[j, j+low]
+
+                dict[hash_value].append(i)
+                
+                if i == len(S)-mid or low >=mid: break
+
+                hash_value = ((hash_value-nums[i]*last_factor) * factor + nums[i+mid]) % module
+                
+            if low < mid: high=mid
+
+        return S[ans[0]:ans[1]]
+    
