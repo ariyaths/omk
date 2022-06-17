@@ -1,0 +1,31 @@
+from sortedcontainers import SortedList as SL
+
+class AllOne:
+
+    def __init__(self):
+        self.key_freq = defaultdict(int)        
+        self.list = SL()
+
+    def inc(self, key: str) -> None:
+        count = self.key_freq[key]
+        if count > 0: self.list.remove((count, key))
+        self.key_freq[key] += 1
+        count = self.key_freq[key]
+        self.list.add((count, key))
+
+    def dec(self, key: str) -> None:
+        count = self.key_freq[key]        
+        if count > 0: self.list.remove((count, key))
+        else: return
+            
+        self.key_freq[key] -= 1
+        count = self.key_freq[key]  
+        if count > 0: self.list.add((count, key))        
+                                                        
+    def getMaxKey(self) -> str:
+        if not self.list: return ''
+        return self.list[-1][1]
+        
+    def getMinKey(self) -> str:
+        if not self.list: return ''
+        return self.list[0][1]
