@@ -1,0 +1,46 @@
+class UnionFind:
+    def __init__(self, n):
+        self.id = list(range(n))
+        self.sz, self.count = [1] * n, n
+
+    def find(self, p):
+        if self.id[p] != p: self.id[p] = self.find(self.id[p])
+        return self.id[p]
+    
+    def union(self, p, q):
+        i, j = self.find(p), self.find(q)
+        if i == j: return
+        if self.sz[i] < self.sz[j]:
+            self.id[i] = j; self.sz[j] += self.sz[i]
+        else:
+            self.id[j] = i; self.sz[i] += self.sz[j]
+        self.count -= 1
+    
+class Solution:
+    def findCriticalAndPseudoCriticalEdges(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        se = sorted(enumerate(edges), key=lambda x: x[1][2])  # sorted edges
+        def kruskal(pre_add, ban):  # pre-added edge and banned edge (sorted index). -1 means not adopting
+            uf, totw = UnionFind(n), 0
+            if pre_add >= 0:
+                _, (u, v, w) = se[pre_add]
+                uf.union(u, v)
+                totw += w
+                if uf.count == 1: return totw
+            for i in range(len(edges)):
+                if i == ban or i == pre_add: continue
+                _, (u, v, w) = se[i]
+                if uf.find(u) != uf.find(v):
+                    uf.union(u, v)
+                    totw += w
+                    if uf.count == 1: break
+            return totw if uf.count == 1 else 1000*1001
+        MSTw = kruskal(-1, -1)  # normal weight of MST
+        ans = [[],[]]
+        for i in range(len(edges)):
+            if kruskal(-1, i) > MSTw:  # banning ith edge (sorted index)
+                ans[0].append(se[i][0])  # store the original index of edge
+            elif kruskal(i, -1) == MSTw:  # pre-add ith edge (sorted index)
+                ans[1].append(se[i][0])
+        return ans
+    
+    # UNION FIND + KRUSKAL
