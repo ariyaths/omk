@@ -1,0 +1,26 @@
+class Solution:
+    def findSecretWord(self, wordlist: List[str], master: 'Master') -> None:
+        numGuesses = 0 
+        while  numGuesses < 10:
+            index = random.randint(0, len(wordlist) - 1)
+            numCorrect = master.guess(wordlist[index])
+
+            if numCorrect == 6:
+                return
+            
+            numGuesses += 1
+            newList = []
+
+            for i in range(len(wordlist)):
+                
+                word = wordlist[i]
+                numInSamePos = 0
+                
+                for j in range(len(word)):
+                    if word[j] == wordlist[index][j]:
+                        numInSamePos += 1
+            
+                if numInSamePos == numCorrect:
+                    newList.append(word)
+            
+            wordlist = newList
