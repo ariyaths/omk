@@ -1,0 +1,40 @@
+import collections
+import random
+class RandomizedCollection(object):
+
+    def __init__(self):
+        self.idx_map = collections.defaultdict(list)
+        self.items = []
+        
+    def insert(self, val):
+        seen = True
+        if val in self.idx_map:
+            seen = False
+        self.idx_map[val].append(len(self.items))
+        self.items.append(val)
+        
+        return seen
+
+    def remove(self, val):
+        if val not in self.idx_map:
+            return False
+
+        idx = self.idx_map[val].pop()
+        if len(self.idx_map[val]) == 0:
+            del self.idx_map[val]
+            
+        if idx == len(self.items)-1:
+            self.items.pop()
+            return True
+        
+        end = self.items.pop()
+        self.items[idx] = end
+        
+        self.idx_map[end].remove(len(self.items))
+        
+        self.idx_map[end].append(idx)
+        return True
+        
+
+    def getRandom(self):
+        return self.items[random.randint(0, len(self.items)-1)]
