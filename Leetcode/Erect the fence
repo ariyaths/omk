@@ -1,0 +1,37 @@
+class Solution:
+    def cross(self, o, a, b):
+        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])    
+    
+    def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
+        trees.sort()
+
+        if len(trees) == 1:
+            return trees
+
+        lower = []
+        for p in trees:
+            while len(lower) >= 2 and self.cross(lower[-2], lower[-1], p) < 0:
+                lower.pop()
+            lower.append(p)
+
+        upper = []
+        for p in reversed(trees):
+            while len(upper) >= 2 and self.cross(upper[-2], upper[-1], p) < 0:
+                upper.pop()
+            upper.append(p)
+            
+        boundary = set()
+        for item in lower:
+            boundary.add(tuple(item))
+            
+        for item in upper:
+            boundary.add(tuple(item))
+            
+        result = []
+        
+        for item in list(boundary):
+            result.append(list(item))
+            
+        return result
+    
+    # ANDREWS MONOTONE CHAIN ALGORITHM
