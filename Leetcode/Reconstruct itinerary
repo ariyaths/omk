@@ -1,0 +1,35 @@
+class Solution(object):
+    def build_graph(self, tickets):
+        g, ticket_id = {}, 0
+        for trip in tickets:
+            v, w = trip[0], trip[1]
+            g.setdefault(v, [])
+            g[v].append((w, ticket_id))
+            ticket_id = ticket_id + 1
+        for k in g:
+            g[k].sort(key=lambda x:x[0])
+        return g
+    
+    def findItinerary(self, tickets):
+        g = self.build_graph(tickets)
+        tickets_used, itenary = set([]), ["JFK"]
+        self.tour(g, itenary, tickets_used, len(tickets)+1)
+        return itenary
+    
+    def tour(self, g, itenary, tickets_used, N):
+        if len(itenary) == N:
+            return True
+        else:
+            s = itenary[-1]
+            if s in g:
+                candidates = ((nbr, tid) for nbr, tid in g[s] if tid not in tickets_used)
+                for nbr, ticket_id in candidates:
+                    tickets_used.add(ticket_id)
+                    itenary.append(nbr)
+                    if self.tour(g, itenary, tickets_used, N):
+                        return True
+                    itenary.pop()
+                    tickets_used.remove(ticket_id)
+            return False
+        
+        # EULER PATH ALGO
