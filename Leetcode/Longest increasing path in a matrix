@@ -1,0 +1,40 @@
+class Solution:
+    def longestIncreasingPath(self, A: List[List[int]]) -> int:
+        m = len(A)
+        n = len(A[0])
+        A = reduce(lambda x, y: x + y, A)
+        
+        def opt(x):
+            res = []
+            r = x // n
+            c = x - r * n
+            
+            if c > 0  and A[x - 1] > A[x]:
+                res.append(x - 1)
+                
+            if c < n - 1 and A[x + 1] > A[x]:
+                res.append(x + 1)
+                
+            if r > 0 and A[x - n] > A[x]:
+                res.append(x - n)
+                
+            if r < m - 1 and A[x + n] > A[x]:
+                res.append(x + n)
+                
+            return res
+        
+        @cache
+        def dfs(x):
+            opts = opt(x)
+            
+            if not opts:
+                return 1
+            
+            best = 1
+            
+            for i in opts:
+                best = max(best, dfs(i) + 1)
+                
+            return best
+        
+        return max(map(dfs, range(m*n)))
