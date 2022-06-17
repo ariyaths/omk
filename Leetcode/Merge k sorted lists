@@ -1,0 +1,18 @@
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        if not lists: return None
+        
+        mega = []
+        for l in lists:
+            while l:
+                mega.append(l.val)
+                l = l.next
+        mega.sort()
+        
+        result = ListNode()
+        prev = result
+        for val in mega:
+            node = ListNode(val)
+            prev.next = node
+            prev = node
+        return result.next
