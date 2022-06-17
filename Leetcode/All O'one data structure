@@ -1,0 +1,33 @@
+class AllOne:
+
+    def __init__(self):
+        self.data = {}
+
+
+    def inc(self, key):
+        self.data[key] = self.data.get(key, 0) + 1
+
+
+
+    def dec(self, key):
+        if key in self.data:
+            if self.data[key] == 1:
+                del self.data[key]
+            else:
+                self.data[key] -= 1
+
+
+
+    def getMaxKey(self):
+        if not self.data: return ""
+        data = self.data
+        sorted_tuple = sorted(data.items(), key=lambda kv: kv[1])
+        return sorted_tuple[-1][0]
+
+
+
+    def getMinKey(self):
+        if not self.data: return ""
+        data = self.data
+        sorted_tuple = sorted(data.items(), key=lambda kv: kv[1])
+        return sorted_tuple[0][0]
