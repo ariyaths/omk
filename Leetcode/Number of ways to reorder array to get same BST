@@ -1,0 +1,10 @@
+class Solution:
+    def numOfWays(self, n: List[int]) -> int:
+        def countWays(n):
+            if not n:
+                return 1
+            n1 = [num for num in n if num < n[0]]
+            n2 = [num for num in n if num > n[0]]
+            return countWays(n1) * countWays(n2) * math.comb(len(n1) + len(n2), len(n2))
+        
+        return (countWays(n)-1) % (10 ** 9 + 7)
