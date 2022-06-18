@@ -1,0 +1,22 @@
+class Solution:
+    def findKthNumber(self, n, k):
+        curr = 1 
+        
+        while k > 1:
+            s = 0 
+            left = right = curr
+            
+            while left <= n:
+                s += min(right, n) - left  + 1
+                left *= 10 
+                right = right * 10 + 9
+                
+            if k > s:
+                curr += 1
+                k -= s 
+                
+            else:
+                curr = curr * 10  
+                k -= 1 
+                
+        return curr 
