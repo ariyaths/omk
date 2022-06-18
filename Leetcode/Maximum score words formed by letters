@@ -1,0 +1,14 @@
+class Solution:
+  def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
+    values = {w: sum(score[ord(c)-ord('a')] for c in w) for w in words}
+    counters = {w: Counter(w) for w in words}
+    
+    def dfs(counts, i):
+      best = 0
+      for j in range(i, len(words)):
+        word = words[j]
+        if not counters[word] - counts:
+          best = max(best, values[word] + dfs(counts - counters[word], j+1))
+      return best
+    
+    return dfs(Counter(letters), 0)
