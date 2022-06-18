@@ -1,0 +1,57 @@
+class Solution():
+    def fullJustify(self, words, maxWidth):
+        
+        ans = []
+        lst = []
+        track = []
+        length = 0
+        
+        for word in words:
+            
+            if len(word) + length > maxWidth:
+                lst.append(" ".join(track))
+                length = 0
+                track = []
+                
+            length += len(word) + 1
+            track.append(word)
+            
+        if track:
+            lst.append(" ".join(track))
+            
+        for word in lst[:-1]:
+            if len(word) == maxWidth:
+                ans.append(word)
+                continue
+                
+            word = word.split()
+            l = sum(map(len,word))
+            dp = [1] * (max(1,len(word) - 1))
+            end = 0
+            
+            while True:
+                for i in range(len(dp)):
+                    
+                    if sum(dp) + l == maxWidth:
+                        end = 1
+                        break
+                        
+                    dp[i] += 1
+                    
+                if end:
+                    break
+                    
+            dp = map(lambda x : " " * x ,dp)
+            c = ""
+            
+            for word,sep in itertools.zip_longest(word, dp, fillvalue=""):
+                c += word + sep
+            ans.append(c)
+            
+        last = lst[-1]
+        
+        if len(last) == maxWidth:
+            return ans + [last]
+        
+        d = maxWidth - len(last)
+        return ans + [last + " " * d]
