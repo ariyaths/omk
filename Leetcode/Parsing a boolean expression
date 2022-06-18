@@ -1,0 +1,49 @@
+class Solution(object):
+    def parseBoolExpr(self, expression):
+        
+        def conv(c):
+            if c == 't':
+                return True
+            
+            elif c =='f':
+                return False
+            
+            else:
+                return c
+            
+        def calc(op, booleans):
+            if op == '!': 
+                return not booleans[0]
+            
+            elif op == '&':
+                return all(booleans)
+            
+            elif op == '|':
+                return any(booleans)
+            
+            else:
+                print('error',op)
+                return True
+            
+        stack = []
+        for i, c in enumerate(expression):
+            
+            if c != ')': 
+                if c != ',': 
+                    stack.append(conv(c))
+            
+            else:
+                booleans = []
+                
+                while stack:
+                    p = stack.pop()
+                    
+                    if p == '(':
+                        op = stack.pop()
+                        stack.append(calc(op, booleans))
+                        break
+                
+                    else:
+                        booleans.append(p)
+            
+        return stack[0]
