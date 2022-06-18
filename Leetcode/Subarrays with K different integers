@@ -1,0 +1,22 @@
+class Solution:
+
+    def dfs(self, nums, k):
+        count, left, dict1 = 0, 0, defaultdict(int)
+
+        for right in range(len(nums)):
+            dict1[nums[right]] += 1
+
+            while len(dict1) > k:
+                dict1[nums[left]] -= 1
+
+                if dict1[nums[left]] == 0:
+                    del dict1[nums[left]]
+
+                left += 1
+
+            count += right - left + 1
+
+        return count
+
+    def subarraysWithKDistinct(self, nums, k):
+        return self.dfs(nums, k) - self.dfs(nums, k-1)
