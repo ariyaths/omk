@@ -1,0 +1,10 @@
+from collections import Counter as cc
+
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        out = ""
+        
+        for char, times in cc(s).most_common():
+            out += char * times
+        
+        return out
