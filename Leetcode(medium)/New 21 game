@@ -1,0 +1,13 @@
+class Solution:
+    def new21Game(self, n: int, k: int, maxPts: int) -> float:
+        dp = [0] * (k + maxPts)
+
+        dp[k: n + 1] = [1] * (n - k + 1)
+        curr = min(maxPts, n - k + 1)
+
+        for i in range(k - 1, -1, -1):
+
+            dp[i] = curr / maxPts
+            curr += dp[i] - dp[i + maxPts]
+
+        return dp[0]
