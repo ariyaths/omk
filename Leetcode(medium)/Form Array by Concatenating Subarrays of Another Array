@@ -1,0 +1,16 @@
+class Solution(object):
+    def canChoose(self, groups, nums):
+        res = 0
+        i = 0
+        for arr in (groups):
+            m = len(arr)
+            
+            while i + m < (len(nums)) + 1:
+                if nums[i: m + i] == arr:
+                    i += m
+                    res += 1
+                    break
+                    
+                i +=1
+                
+        return res == len(groups)
