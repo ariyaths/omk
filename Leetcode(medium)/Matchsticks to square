@@ -1,0 +1,29 @@
+class Solution:
+
+    def recursive(self, arr, target, idx, n, times = 0):
+        if times == 3: return True
+        if idx == n: return False
+        if 4 - times > n - idx: return False
+        
+        for i in range(4):
+            if arr[i] == target or arr[i] + self.matches[idx] > target: continue
+            old = arr[i]
+            arr[i] += self.matches[idx]
+            new = times
+            
+            if arr[i] == target: new += 1
+            if self.recursive(arr, target, idx + 1, n, new): return True
+            arr[i] = old
+        
+        return False
+    
+    def makesquare(self, matchsticks: List[int]) -> bool:
+        summ = sum(matchsticks)
+        if summ%4!=0: return False
+        
+        target = summ // 4
+        if max(matchsticks) > target: return False
+        matchsticks.sort(reverse=True)
+        
+        self.matches = matchsticks
+        return self.recursive([0] * 4, target, 0, len(matchsticks))
