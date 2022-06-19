@@ -1,0 +1,25 @@
+class Solution:
+    def sumGame(self, num: str) -> bool:
+        n = len(num)
+        a = b = 0
+        l = r = 0
+
+        for c in num[ : n // 2]:
+            if c == "?":
+                a += 1
+            else:
+                l += int(c)
+
+        for c in num[n // 2 : ]:
+            if c == "?":
+                b += 1
+            else:
+                r += int(c)
+
+        if (a + b) % 2 == 1:
+            return True
+
+        if l - r == 9 * (b - a) // 2:
+            return False
+        
+        return True
