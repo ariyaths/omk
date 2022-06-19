@@ -1,0 +1,16 @@
+class Solution:
+	def numMovesStones(self, a: int, b: int, c: int) -> List[int]:
+
+		a, b, c = sorted([a, b, c])
+		gap1 = b - a
+		gap2 = c - b
+
+		if gap1 == 2 or gap2 == 2:
+			minimum = 1
+            
+		else:
+			minimum = 0 if gap1 == 1 else 1
+			minimum += 0 if gap2 == 1 else 1
+
+		maximum = gap1 + gap2 - 2
+		return [minimum, maximum]
