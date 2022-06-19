@@ -1,0 +1,24 @@
+class Solution:
+    def countRectangles(self, rectangles, points):
+        rectangles.sort(key = lambda x:x[0])
+        dict1 = defaultdict(list)
+
+        for l, h in rectangles:
+            dict1[h].append(l)
+
+
+        def is_contain(i,j):
+            count = 0
+
+            for height, width in dict1.items():
+                if height >= j:
+                    count += len(width) - bisect.bisect(width, i-1)
+
+            return count
+
+        ans = []
+
+        for point in points:
+            ans.append(is_contain(point[0], point[1]))
+
+        return ans
