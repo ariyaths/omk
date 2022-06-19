@@ -1,0 +1,16 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        to_do_courses = set(range(numCourses))
+
+        while prerequisites:
+            cant_remove = set(goal for _, goal in prerequisites)
+            can_remove = to_do_courses - cant_remove
+        
+            if not can_remove:
+                return False
+            
+            prerequisites = [p for p in prerequisites if not p[0] in can_remove]
+            to_do_courses = to_do_courses - can_remove
+            
+        return True
