@@ -1,0 +1,12 @@
+from math import prod
+
+class ProductOfNumbers:
+
+    def __init__(self):
+        self.stream = []
+
+    def add(self, num: int) -> None:
+        self.stream += [num]
+
+    def getProduct(self, k: int) -> int:
+        return prod(self.stream[-k:])
