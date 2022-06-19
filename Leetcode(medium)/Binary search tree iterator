@@ -1,0 +1,16 @@
+class BSTIterator(object):
+    def __init__(self, root):
+        self.trav = root
+        self.stack = []
+
+    def hasNext(self):
+        return self.trav or self.stack
+        
+    def next(self):
+        while self.trav:
+            self.stack.append(self.trav)
+            self.trav = self.trav.left
+            
+        u = self.stack.pop()
+        self.trav = u.right
+        return u.val
