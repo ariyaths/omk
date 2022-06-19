@@ -1,0 +1,19 @@
+class Solution:
+	def sortList(self, head: ListNode) -> ListNode:
+		if not head:
+			return None
+        
+		myList = []
+        
+		while head:
+			myList.append(head.val)
+			head = head.next
+        
+		myList.sort()
+		newHead = point = ListNode(0)
+                                  
+		for i in range(len(myList)):
+			point.next = ListNode(myList[i])
+			point = point.next
+            
+		return newHead.next
