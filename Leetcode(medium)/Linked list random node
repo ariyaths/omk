@@ -1,0 +1,20 @@
+from random import choice as choice
+
+class Solution:
+
+    def __init__(self, head: Optional[ListNode]):
+        
+        num_list = []
+        
+        def recurse(node, l):
+            if node:
+                l += [node.val]
+                return recurse(node.next, l)
+        
+        recurse(head, num_list)
+        self.l = num_list
+        
+
+    def getRandom(self) -> int:
+        return choice(self.l)
+
