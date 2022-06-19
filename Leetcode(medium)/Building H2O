@@ -1,0 +1,25 @@
+    from threading import Lock
+
+    class H2O:
+        def __init__(self):
+            self.h = Lock()
+            self.o = Lock()
+            self.o.acquire()
+            self.n = 0
+
+        def hydrogen(self, releaseHydrogen: 'Callable[[], None]') -> None:
+            self.h.acquire()
+            self.n += 1
+            releaseHydrogen()
+
+            if self.n == 2:
+                self.n = 0
+                self.o.release()
+
+            else:
+                self.h.release()
+
+        def oxygen(self, releaseOxygen: 'Callable[[], None]') -> None:
+            self.o.acquire()
+            releaseOxygen()
+            self.h.release()
