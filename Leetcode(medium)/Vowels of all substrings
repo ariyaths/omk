@@ -1,0 +1,13 @@
+class Solution:
+    def countVowels(self, word: str) -> int:
+            n = len(word)
+            res = 0
+
+            for i,c in enumerate(word):
+                left = i + 1
+                right = n - i
+
+                if c in "aeiou":
+                    res += left * right
+
+            return res
