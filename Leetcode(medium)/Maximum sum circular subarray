@@ -1,0 +1,18 @@
+class Solution:
+    def maxSubarraySumCircular(self, A: List[int]) -> int:
+        local_max = global_max = float("-inf")
+        local_min = global_min = float("inf")
+        total = 0
+        
+        for n in A:
+            local_max = max(local_max + n, n)
+            global_max = max(global_max, local_max)
+            local_min = min(local_min + n, n)
+            global_min = min(global_min, local_min)
+            total += n
+        
+        # if all values are negative, return non-circular max sub array.
+        if total == global_min:
+            return global_max
+
+        return max(global_max, total - global_min)
