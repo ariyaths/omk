@@ -1,0 +1,18 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        
+        set1, set2 = set(), set()
+        num1, num2 = 0, 10
+        
+        while num2 <= len(s):
+            curr = s[num1: num2]
+            
+            if curr in set1:
+                set2.add(curr)
+            else:
+                set1.add(curr)
+                
+            num1+=1
+            num2+=1
+            
+        return list(set2)
