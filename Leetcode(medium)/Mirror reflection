@@ -1,0 +1,11 @@
+class Solution:
+    def mirrorReflection(self, p, q):
+        n = 1
+        
+        while n * q % p:
+            n += 1
+            
+        if not n % 2: 
+            return 2
+        
+        return 1 if (n * q // p) % 2 else 0
