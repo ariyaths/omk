@@ -1,0 +1,32 @@
+class Solution(object):
+    def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        ans = []
+        
+        if not head:
+            return head
+
+        def traverse(node):
+            if not node:
+                return
+            
+            nonlocal ans
+            ans.append(node)
+            
+            if node.child:
+                traverse(node.child)
+            
+            if node.next:
+                traverse(node.next)
+
+        traverse(head)
+
+        head = Node(ans[0].val)
+        curr = t = head
+        
+        for i in range(1,len(ans)):
+            head = Node(ans[i].val)
+            curr.next = head
+            head.prev = curr
+            curr = head
+        
+        return t
